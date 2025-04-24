@@ -121,17 +121,6 @@ public class ArvoreAVL {
         if (raiz.direito != null) {
             FBdireito = fatorBalanceamento(raiz.direito);
         }
-
-        System.out.println("Inserido: " + chave);
-        System.out.println("Raiz atual: " + raiz.chave + " | FB: " + FBraiz);
-
-        if (raiz.esquerdo != null) {
-            System.out.println(" -> Esquerdo: " + raiz.esquerdo.chave + " | FB: " + FBesquerdo);
-        }
-
-        if (raiz.direito != null) {
-            System.out.println(" -> Direito: " + raiz.direito.chave + " | FB: " + FBdireito);
-        }
     
         // Caso Esquerda-Esquerda (LL)
         if (FBraiz > 1 && FBesquerdo >= 0) {
@@ -216,4 +205,50 @@ public class ArvoreAVL {
         return raiz;
     }
 
+    public No buscar(No raiz, int chave) {
+        if (raiz == null || raiz.chave == chave) {
+            return raiz;
+        }
+    
+        if (chave < raiz.chave) {
+            return buscar(raiz.esquerdo, chave);
+        } else {
+            return buscar(raiz.direito, chave);
+        }
+    }
+
+    public String preOrdemVLR(No no) {
+        if (no == null) return "";
+        return no.chave + " " + preOrdemVLR(no.esquerdo) + preOrdemVLR(no.direito);
+    }
+    
+    public String preOrdemVRL(No no) {
+        if (no == null) return "";
+        return no.chave + " " + preOrdemVRL(no.direito) + preOrdemVRL(no.esquerdo);
+    }
+
+    public String inOrdemLVR(No no) {
+        if (no == null) return "";
+        return inOrdemLVR(no.esquerdo) + no.chave + " " + inOrdemLVR(no.direito);
+    }
+    
+    public String inOrdemRVL(No no) {
+        if (no == null) return "";
+        return inOrdemRVL(no.direito) + no.chave + " " + inOrdemRVL(no.esquerdo);
+    }
+
+    public String posOrdemLRV(No no) {
+        if (no == null) return "";
+        return posOrdemLRV(no.esquerdo) + posOrdemLRV(no.direito) + no.chave + " ";
+    }
+    
+    public String posOrdemRLV(No no) {
+        if (no == null) return "";
+        return posOrdemRLV(no.direito) + posOrdemRLV(no.esquerdo) + no.chave + " ";
+    }
+    
+    public String limparEspacos(String resultado) {
+        return resultado.trim().replaceAll(" +", " ");
+    }
+    
 }

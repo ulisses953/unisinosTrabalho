@@ -11,5 +11,10 @@ public class No {
         esquerdo = direito = null;
     }
 
+    public No() {
+        this.altura = 1;
+        esquerdo = direito = null;
+    }
+
 
 }

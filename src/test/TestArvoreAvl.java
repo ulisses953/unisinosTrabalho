@@ -1,6 +1,7 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
@@ -577,7 +578,7 @@ public class TestArvoreAvl {
         assertEquals(30, raiz.direito.chave);
     }
 
-        @Test
+    @Test
     public void testRemoverCausaRotacaoLR() {
         ArvoreAVL avl = new ArvoreAVL();
         No raiz = null;
@@ -606,5 +607,71 @@ public class TestArvoreAvl {
         assertEquals(20, raiz.chave);
         assertNull(raiz.esquerdo);
         assertEquals(30, raiz.direito.chave);
+    }
+
+    @Test
+    public void testBuscar_Existente() {
+        ArvoreAVL avl = new ArvoreAVL();
+        No raiz = null;
+        raiz = avl.inserir(raiz, 10);
+        raiz = avl.inserir(raiz, 20);
+        raiz = avl.inserir(raiz, 5);
+
+        No resultado = avl.buscar(raiz, 20);
+        assertNotNull(resultado);
+        assertEquals(20, resultado.chave);
+    }
+
+    @Test
+    public void testBuscar_NaoExistente() {
+        ArvoreAVL avl = new ArvoreAVL();
+        No raiz = null;
+        raiz = avl.inserir(raiz, 10);
+        raiz = avl.inserir(raiz, 5);
+
+        No resultado = avl.buscar(raiz, 99);
+        assertNull(resultado);
+    }
+
+    @Test
+    public void testBuscar_Raiz() {
+        ArvoreAVL avl = new ArvoreAVL();
+        No raiz = avl.inserir(null, 42);
+
+        No resultado = avl.buscar(raiz, 42);
+        assertNotNull(resultado);
+        assertEquals(42, resultado.chave);
+    }
+
+    @Test
+    public void testPercursosSimples() {
+        ArvoreAVL arvore = new ArvoreAVL();
+        No raiz = null;
+
+        raiz = arvore.inserir(raiz, 10);
+        raiz = arvore.inserir(raiz, 5);
+        raiz = arvore.inserir(raiz, 15);
+        raiz = arvore.inserir(raiz, 3);
+        raiz = arvore.inserir(raiz, 7);
+        raiz = arvore.inserir(raiz, 13);
+        raiz = arvore.inserir(raiz, 17);
+
+        // Pré-ordem VLR: raiz -> esq -> dir
+        assertEquals("10 5 3 7 15 13 17", arvore.limparEspacos(arvore.preOrdemVLR(raiz)));
+
+        // Pré-ordem VRL: raiz -> dir -> esq
+        assertEquals("10 15 17 13 5 7 3", arvore.limparEspacos(arvore.preOrdemVRL(raiz)));
+
+        // In-ordem LVR: esq -> raiz -> dir
+        assertEquals("3 5 7 10 13 15 17", arvore.limparEspacos(arvore.inOrdemLVR(raiz)));
+
+        // In-ordem RVL: dir -> raiz -> esq
+        assertEquals("17 15 13 10 7 5 3", arvore.limparEspacos(arvore.inOrdemRVL(raiz)));
+
+        // Pós-ordem LRV: esq -> dir -> raiz
+        assertEquals("3 7 5 13 17 15 10", arvore.limparEspacos(arvore.posOrdemLRV(raiz)));
+
+        // Pós-ordem RLV: dir -> esq -> raiz
+        assertEquals("17 13 15 7 3 5 10", arvore.limparEspacos(arvore.posOrdemRLV(raiz)));
     }
 }
