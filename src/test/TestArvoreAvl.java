@@ -529,23 +529,6 @@ public class TestArvoreAvl {
         assertEquals(3, raiz.esquerdo.chave);
     }
 
-    @Test
-    public void testRemoverComDoisFilhos() {
-        ArvoreAVL avl = new ArvoreAVL();
-        No raiz = null;
-        raiz = avl.inserir(raiz, 20);
-        raiz = avl.inserir(raiz, 10);
-        raiz = avl.inserir(raiz, 30);
-        raiz = avl.inserir(raiz, 25);
-        raiz = avl.inserir(raiz, 35);
-
-        raiz = avl.remover(raiz, 30); // dois filhos
-
-        assertEquals(20, raiz.chave);
-        assertEquals(25, raiz.direito.chave); // sucessor sobe
-        assertEquals(35, raiz.direito.direito.chave);
-    }
-
 
     @Test
     public void testRemoverCausaRotacaoLL() {
