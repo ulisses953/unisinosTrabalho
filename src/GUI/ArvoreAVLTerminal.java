@@ -14,6 +14,8 @@ public class ArvoreAVLTerminal {
         No raiz = null;
         boolean sair = true;
         while (sair) {
+            System.out.println("\n: Integrantes: Arthur Rambor, Ulisses, Leonardo Taborda");
+
             System.out.println("\n==== ÁRVORE AVL ====");
             System.out.println("1. Inserir valor");
             System.out.println("2. Excluir valor");
