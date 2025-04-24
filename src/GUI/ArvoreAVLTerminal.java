@@ -2,6 +2,8 @@ package GUI;
 
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import arvore.ArvoreAVL;
 import arvore.No;
 
@@ -19,7 +21,7 @@ public class ArvoreAVLTerminal {
             System.out.println("4. Mostrar em Pré-Ordem (VLR)");
             System.out.println("5. Mostrar em In-Ordem (LVR)");
             System.out.println("6. Mostrar em Pós-Ordem (LRV)");
-            System.out.println("7. Sair");
+            System.out.println("7. Árvore Gráfica");
             System.out.print("Escolha: ");
             int opcao = scanner.nextInt();
 
@@ -51,10 +53,14 @@ public class ArvoreAVLTerminal {
                 case 5 -> System.out.println("In-Ordem (LVR): " + arvore.inOrdemLVR(raiz));
                 case 6 -> System.out.println("Pós-Ordem (LRV): " + arvore.posOrdemLRV(raiz));
                 case 7 -> {
-                    System.out.println("Saindo...");
-                    scanner.close();
-                    sair = false;
+                    JFrame frame = new JFrame("Visualização da Árvore AVL");
+                    PainelArvoreAVL painel = new PainelArvoreAVL();
+                    painel.setRaiz(raiz);
+                    frame.add(painel);
+                    frame.setSize(800, 600);
+                    frame.setVisible(true);
                 }
+
                 default -> System.out.println("Opção inválida!");
             }
         }
